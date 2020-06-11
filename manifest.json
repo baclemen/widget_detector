@@ -1,0 +1,14 @@
+{
+  "name": "widget_detection",
+  "version": "0.1",
+  "description": "detecting widgets like datepicker etc.",
+  "permissions": ["activeTab", "declarativeContent", "storage", "contextMenus"],
+  "manifest_version": 2,
+  "content_scripts" : [
+    {
+      "matches" : ["<all_urls>"],
+      "css" : ["date_picker.css"],
+      "js" : ["date_picker.js"]
+    }
+  ]
+}

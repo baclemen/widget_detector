@@ -1,0 +1,12 @@
+input[class*=date]{
+    background: #ffff00 !important;
+}
+input[class*=Date]{
+    background: #ffff00 !important;
+}
+input[id*=date]{
+    background: #ffff00 !important;
+}
+input[id*=Date]{
+    background: #ffff00 !important;
+}
