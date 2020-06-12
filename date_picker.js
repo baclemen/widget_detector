@@ -1,12 +1,17 @@
 console.log("Chrome Extension works");
 
-const head =document.querySelector('head')
+const head =document.querySelector('head');
 
+
+var script = document.createElement('script');
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js';
+head.appendChild(script);
 //add jquery
-console.log(head);
-head.innerHTML += '<script src="https://code.jquery.com/jquery-3.5.0.js"></script>';
+// console.log(head);
+// head.appendChild('<script src="https://code.jquery.com/jquery-3.5.0.js"></script>');
 
 // .appendChild('<script src="https://code.jquery.com/jquery-3.5.0.js"></script>')
+$("head");
 
 //select all datepicker objects on the website
 const dateselectorlist = document.querySelectorAll('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]');
@@ -25,8 +30,8 @@ function setDate(event){
     console.log("nodelist:", dateselectorlist.item(0));
     console.log(event);
     //dateselectorlist.item(0).setAttribute("value","1.1.2020"); //TODO: make this possible for any amount of date pickers
-    //dateselectorlist.item(0).trigger('click');
-    $('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]').first().trigger("click")
+    dateselectorlist.item(0).click();
+    //$('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]').first().trigger("click");
 }
 
 

@@ -8,7 +8,7 @@
     {
       "matches" : ["<all_urls>"],
       "css" : ["date_picker.css"],
-      "js" : ["date_picker.js"]
+      "js" : ["thirdParty/jquery-3.5.1.min.js", "date_picker.js"]
     }
   ]
 }
