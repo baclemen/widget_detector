@@ -1,12 +1,19 @@
-input[class*=date]{
+input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]{
     background: #ffff00 !important;
 }
-input[class*=Date]{
+/* input[class*=Date]{
     background: #ffff00 !important;
 }
 input[id*=date]{
     background: #ffff00 !important;
 }
 input[id*=Date]{
-    background: #ffff00 !important;
+    background: #ffff00 !important; 
+}*/
+button[class=detectorbutton]{
+    background-color: red !important;
+    color: white;
+    position: absolute !important;
+    border: 3px solid red !important;
+    z-index: 1000 !important;
 }
