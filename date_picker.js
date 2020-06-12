@@ -17,14 +17,18 @@ for(var i = 0; i < dateselectorlist.length; i++) {
     btn = document.createElement("BUTTON");
     btn.innerHTML = "setDate";
     btn.className = "detectorbutton";
-    btn.id = "detectorbutton" + i.toString;
+    btn.onclick = function(event){event.preventDefault(); console.log("click")}
     dateselectorlist.item(i).parentNode.appendChild(btn);
     console.log("button added");
 };
 
-
-//document.getElementById("detectorbutton").addEventListener("click", console.log("clicked"))
-
-
+function setDate(){
+    event.preventDefault()
+    console.log("setDate");
+}
+if(document.getElementById("detectorbutton0") == null){}
+else{
+    document.getElementById("detectorbutton0").addEventListener("click", setDate(event));
+}
 // const body = document.querySelector('body');
 // body.appendChild(btn);
