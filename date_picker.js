@@ -11,7 +11,6 @@ head.appendChild(script);
 // head.appendChild('<script src="https://code.jquery.com/jquery-3.5.0.js"></script>');
 
 // .appendChild('<script src="https://code.jquery.com/jquery-3.5.0.js"></script>')
-$("head");
 
 //select all datepicker objects on the website
 const dateselectorlist = document.querySelectorAll('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]');
@@ -24,14 +23,16 @@ console.log(dateselectorlist);
 //functions and definitions
 
 //setting the date in the field to a specific value
-function setDate(event){
+function setDate(event){ //TODO: make this possible for any amount of date pickers
     event.preventDefault();
     console.log("setDate");
     console.log("nodelist:", dateselectorlist.item(0));
     console.log(event);
-    //dateselectorlist.item(0).setAttribute("value","1.1.2020"); //TODO: make this possible for any amount of date pickers
+    //dateselectorlist.item(0).setAttribute("value","1.1.2020"); 
     dateselectorlist.item(0).click();
-    //$('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]').first().trigger("click");
+    // var input = $('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]');
+    // input[0].selectionStart = input[0].selectionEnd = input.val().length;
+    $("input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]").first().val("1.1.2020");
 }
 
 
