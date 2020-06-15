@@ -1,12 +1,20 @@
-function myFunction() {
-    // Get the checkbox
-    var checkBox = document.getElementById("onoffswitch");
-    
-  
-    // If the checkbox is checked, display the output text
+var checkBox = document.getElementById("onoffswitch");
+
+chrome.storage.sync.get(["enable"], function(data){
+  checkBox.checked = data.enable
+});
+
+checkBox.onclick = function() {
     if (checkBox.checked == true){
-      alert("extension on")
+      chrome.storage.sync.set({enable: true}, function(){
+        console.log("enabled")
+      });
+      console.log("on")
+
     } else {
-      
+      chrome.storage.sync.set({enable: false}, function(){
+        console.log("enabled")
+      });
+      console.log("off");
     }
-  }
+}
