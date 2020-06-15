@@ -11,6 +11,7 @@ input[id*=Date]{
     background: #ffff00 !important; 
 }*/
 button[class=detectorbutton]{
+    display: inline-block;
     background-color: red !important;
     color: white;
     position: absolute !important;
