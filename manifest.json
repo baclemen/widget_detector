@@ -4,6 +4,14 @@
   "description": "detecting widgets like datepicker etc.",
   "permissions": ["activeTab", "declarativeContent", "storage", "contextMenus"],
   "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "widget detector"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "content_scripts" : [
     {
       "matches" : ["<all_urls>"],

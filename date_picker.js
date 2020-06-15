@@ -24,7 +24,7 @@ console.log(dateselectorlist);
 //functions and definitions
 
 //setting the date in the field to a specific value
-function setDate(event){ //TODO: make this possible for any amount of date pickers
+function setDate(event){
     event.preventDefault();
     console.log("setDate");
     console.log("nodelist:", dateselectorlist.item(0));
