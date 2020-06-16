@@ -44,7 +44,7 @@ function setDate(event, date){
     console.log("setDate");
     console.log("nodelist:", dateselectorlist.item(0));
     console.log(event);
-    i =event.srcElement.id.match(/\d+/)[0];
+    i = event.srcElement.id.match(/\d+/)[0];
     //dateselectorlist.item(0).setAttribute("value","1.1.2020"); 
     dateselectorlist.item(0).click();
     // var input = $('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]');

@@ -7,6 +7,7 @@ var globdate = new Date();
 
 console.log(globdate);
 viewchange(globdate,1);
+addlisteners();
 
 
 
@@ -110,5 +111,56 @@ function addlisteners(){
     var navtopright = document.getElementById("navtopright");
     var navbotleft = document.getElementById("navbotleft");
     var navbotright = document.getElementById("navbotright");
-    navtopleft.addEventListener('click',viewchange(globdate.getDate(), globdate.getMonth()-1,globdate.getYear(),1))
+    navtopleft.addEventListener('click', topleft);
+    navtopright.addEventListener('click', topright);
+    navbotleft.addEventListener('click', botleft);
+    navbotright.addEventListener('click', botright);
+
+        var rows = document.getElementById('pickertable').rows;
+        
+        for (var i = 0; i < rows.length; i++) {
+            for (var j = 0; j < rows[i].cells.length; j++ ) {
+                          
+                rows[i].cells[j].addEventListener('click', selectDate);
+        }
+    }
+
+    var pickercontainer = document.getElementById("pickercontainer")
+    pickercontainer.addEventListener('touchmove', handleSwipe);
+}
+
+function topleft(){
+    globdate.setMonth(globdate.getMonth()-1);
+    viewchange(globdate,1);
+}
+function topright(){
+    globdate.setYear(globdate.getFullYear()+1);
+    viewchange(globdate,1);
+}
+function botleft(){
+    globdate.setYear(globdate.getFullYear()-1);
+    viewchange(globdate,1);
+}
+function botright(){
+    globdate.setMonth(globdate.getMonth()+1);
+    viewchange(globdate,1);
+}
+function selectDate(event){
+    console.log(event);
+    var val =event.srcElement.id.match(/\d+/)[0];
+    returnDate(val);
+}
+function handleSwipe(event){
+    console.log(swipe);
+}
+
+function returnDate(val){
+    output = document.getElementById("output")
+    var x = Math.floor(val/10)
+    var y = val % 10;
+    var str =(("d" + x) + y)
+    var val = document.getElementById(str).innerHTML;
+    globdate.setDate(val);
+    
+    output.innerHTML = "Selected date is:" + globdate;
 }
