@@ -39,7 +39,7 @@ console.log(dateselectorlist);
 //functions and definitions
 
 //setting the date in the field to a specific value
-function setDate(event){
+function setDate(event, date){
     event.preventDefault();
     console.log("setDate");
     console.log("nodelist:", dateselectorlist.item(0));
@@ -49,15 +49,14 @@ function setDate(event){
     dateselectorlist.item(0).click();
     // var input = $('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]');
     // input[0].selectionStart = input[0].selectionEnd = input.val().length;
-    $("input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]").eq(i).val("1.1.2020");
+    $("input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]").eq(i).val(date);
 }
 
 
 function createSelectors(){
 
-let dateselector = dateselectorlist.item(0);
 
-    console.log(dateselector);
+
     //iterate through all of them and add buttons
     var btn;
     var no = 0;
@@ -67,7 +66,7 @@ let dateselector = dateselectorlist.item(0);
         btn.className = "detectorbutton";
         btn.id ="detectorbutton"+i;
         btn.number = i;
-        btn.onclick = function(event){event.preventDefault(); console.log("click"); setDate(event)}
+        btn.onclick = function(event){event.preventDefault(); console.log("click"); setDate(event, "1.1.2020")}
         dateselectorlist.item(i).parentNode.appendChild(btn);
         console.log("button added");
     };
