@@ -2,13 +2,11 @@
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var globdate = new Date();
-var today = new Date();
 //today.setDate(today.getDate() - 1);
 
 
-console.log(today);
-console.log(findpos(today));
-viewchange(1,6,2020,1);
+console.log(globdate);
+viewchange(globdate,1);
 
 
 
@@ -46,13 +44,13 @@ function clearboard(){
     }
 }
 
-function writemonth(month,year){
+function writemonth(date){
 
-    document.getElementById("yea").innerHTML = year;
-    document.getElementById("mon").innerHTML = monthNames[month];
+    document.getElementById("yea").innerHTML = date.getFullYear();
+    document.getElementById("mon").innerHTML = monthNames[date.getMonth()];
 
 
-    const datemp = new Date(month + ' 1 ' + year)
+    const datemp = new Date((date.getMonth()+1) + ' 1 ' + date.getFullYear())
     console.log(datemp)
     x = findpos(datemp);
     console.log(x);
@@ -66,7 +64,7 @@ function writemonth(month,year){
         for(var j = rowtemp; j<7; j++){
             setField(i,j,d);
             d++;
-            if (d>daysInMonth(month,year)){
+            if (d>daysInMonth(date)){
                 b = true;
                 break
             }
@@ -78,29 +76,33 @@ function writemonth(month,year){
     }
 }
 
-function writecorners(month,year){
+function writecorners(date){
     var navtopleft = document.getElementById("navtopleft");
     var navtopright = document.getElementById("navtopright");
     var navbotleft = document.getElementById("navbotleft");
     var navbotright = document.getElementById("navbotright");
 
-    navtopleft.innerHTML = monthNames[(month-1+12)%12];
-    navbotright.innerHTML = monthNames[(month+1)%12];
-    navtopright.innerHTML = year + 1;
-    navbotleft.innerHTML = year - 1;
+    navtopleft.innerHTML = monthNames[(date.getMonth()-1+12)%12];
+    navbotright.innerHTML = monthNames[(date.getMonth()+1)%12];
+    navtopright.innerHTML = date.getFullYear() + 1;
+    navbotleft.innerHTML = date.getFullYear() - 1;
 
 }
 
-function daysInMonth (month, year) { 
-    return new Date(year, month, 0).getDate(); 
+function daysInMonth (date) { 
+    x = new Date(date.getFullYear(), date.getMonth(), 0).getDate(); 
+    return x;
 } 
 
-function viewchange (day, month, year, level){
-    globdate.setMonth(month)
-    globdate.setYear(year)
+function viewchange (date, level){
+    console.log(date.getMonth());
+    console.log(date.getFullYear());
+
+    globdate.setMonth(date.getMonth())
+    globdate.setYear(date.getFullYear())
     clearboard();
-    writemonth(month,year);
-    writecorners(month,year);
+    writemonth(date);
+    writecorners(date);
 }
 
 function addlisteners(){
@@ -108,5 +110,5 @@ function addlisteners(){
     var navtopright = document.getElementById("navtopright");
     var navbotleft = document.getElementById("navbotleft");
     var navbotright = document.getElementById("navbotright");
-    navtopleft.addEventListener('click',viewchange())
+    navtopleft.addEventListener('click',viewchange(globdate.getDate(), globdate.getMonth()-1,globdate.getYear(),1))
 }
