@@ -126,8 +126,12 @@ function addlisteners(){
     }
 
     var pickercontainer = document.getElementById("pickercontainer")
-    pickercontainer.addEventListener('touchmove', handleSwipe);
+    pickercontainer.addEventListener("touchstart", handleStart);
+    pickercontainer.addEventListener("touchend", handleEnd);
+    pickercontainer.addEventListener("touchcancel", handleCancel);
+    pickercontainer.addEventListener("touchmove", handleMove);
 }
+
 
 function topleft(){
     globdate.setMonth(globdate.getMonth()-1);
@@ -150,8 +154,17 @@ function selectDate(event){
     var val =event.srcElement.id.match(/\d+/)[0];
     returnDate(val);
 }
-function handleSwipe(event){
-    console.log(swipe);
+function handleStart(event){
+    console.log("start");
+}
+function handleEnd(event){
+    console.log("end");
+}
+function handleCancel(event){
+    console.log("cancel");
+}
+function handleMove(event){
+    console.log("move");
 }
 
 function returnDate(val){
