@@ -133,7 +133,25 @@ function addlisteners(){
     var pickercontainer = document.getElementById('pickercontainer');
     var activeRegion = new ZingTouch.Region(pickercontainer);
     console.log(activeRegion)
-    activeRegion.bind(pickercontainer, 'swipe', function(e){console.log(e)});
+    activeRegion.bind(pickercontainer, 'swipe', function(e){
+        console.log(e);
+        direction = Math.floor(e.detail.currentDirection/90);
+
+        switch(direction){
+            case 0:
+                topright();
+                break;
+            case 1:
+                botright();
+                break;
+            case 2:
+                botleft();
+                break;
+            case 3:
+                topleft();
+                break;
+        }
+    });
 
     console.log("listeners added")
 }
