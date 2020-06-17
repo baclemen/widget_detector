@@ -76,8 +76,12 @@ function createSelectors(){
 
         div.appendChild(btn);
 
-        btn.onclick = function(event){event.preventDefault(); openpicker(event)}
+        
         dateselectorlist.item(i).parentNode.appendChild(div);
+        //btn.onclick = openpicker;
+        var butReg = new ZingTouch.Region(btn);
+        butReg.bind(btn,'tap', openpicker);
+
         console.log("button added");
     };
 }
@@ -90,7 +94,7 @@ function createSelectors(){
 // body.appendChild(btn);
 
 function openpicker(event){
-
+    console.log(" new picker is opened")
     if(isopen){
 
     } else {
@@ -115,6 +119,11 @@ function openpicker(event){
 function closepicker(){
     div = document.getElementById("pickerparent" + pickerno);
     div.removeChild(div.childNodes[2]);
+    isopen = false;
+    btn = div.firstChild;
+    console.log(btn);
+    var butReg = new ZingTouch.Region(btn);
+    butReg.bind(btn,'tap', openpicker);
 }
 
 
@@ -320,12 +329,15 @@ function addlisteners(){
     navbotleft.addEventListener('click', botleft);
     navbotright.addEventListener('click', botright);
 
+    var pickercontainer = document.getElementById('pickercontainer');
+    var activeRegion = new ZingTouch.Region(pickercontainer);
+
         var rows = document.getElementById('pickertable').rows;
         
         for (var i = 0; i < rows.length; i++) {
             for (var j = 0; j < rows[i].cells.length; j++ ) {
-                          
-                rows[i].cells[j].addEventListener('click', selectDate);
+                activeRegion.bind(rows[i].cells[j],'tap', selectDate);
+                //rows[i].cells[j].addEventListener('click', selectDate);
         }
     }
 
@@ -334,8 +346,7 @@ function addlisteners(){
     // pickercontainer.addEventListener("touchend", handleEnd);
     // pickercontainer.addEventListener("touchcancel", handleCancel);
     // pickercontainer.addEventListener("touchmove", handleMove);
-    var pickercontainer = document.getElementById('pickercontainer');
-    var activeRegion = new ZingTouch.Region(pickercontainer);
+
     console.log(activeRegion)
     activeRegion.bind(pickercontainer, 'swipe', onswipe);
 
