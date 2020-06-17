@@ -133,7 +133,7 @@ function addlisteners(){
     var pickercontainer = document.getElementById('pickercontainer');
     var activeRegion = new ZingTouch.Region(pickercontainer);
     console.log(activeRegion)
-    activeRegion.bind(pickercontainer, 'swipe', onswipe);
+    activeRegion.bind(pickercontainer, 'swipe', onswipe(e));
 
     console.log("listeners added")
 }
@@ -180,8 +180,8 @@ swipe = new ZingTouch.Swipe({
 	escapeVelocity: 0.25
 });
 
-function onswipe(event){
-    console.log(event);
+function onswipe(e){
+    console.log(e);
 }
 
 function returnDate(val){
