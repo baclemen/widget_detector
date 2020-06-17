@@ -133,26 +133,7 @@ function addlisteners(){
     var pickercontainer = document.getElementById('pickercontainer');
     var activeRegion = new ZingTouch.Region(pickercontainer);
     console.log(activeRegion)
-    activeRegion.bind(pickercontainer, 'swipe', function(e){
-        console.log(e);
-        console.log(e.detail.data[0].currentDirection)
-        direction = Math.floor(e.detail.data[0].currentDirection/90);
-        console.log(direction);
-        switch(direction){
-            case 0:
-                botleft();
-                break;
-            case 1:
-                botright();
-                break;
-            case 2:
-                topright();
-                break;
-            case 3:
-                topleft();
-                break;
-        }
-    });
+    activeRegion.bind(pickercontainer, 'swipe', onswipe);
 
     console.log("listeners added")
 }
@@ -200,9 +181,22 @@ swipe = new ZingTouch.Swipe({
 });
 
 function onswipe(e){
-    console.log(e)
-    console.log(e.detail.velocity);
-    console.log(e.detail.currentDirection);
+    direction = Math.floor(e.detail.data[0].currentDirection/90);
+    console.log(direction);
+    switch(direction){
+            case 0:
+                botleft();
+                break;
+            case 1:
+                botright();
+                break;
+            case 2:
+                topright();
+                break;
+            case 3:
+                topleft();
+                break;
+        }
 }
 
 function returnDate(val){
