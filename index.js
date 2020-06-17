@@ -140,13 +140,13 @@ function addlisteners(){
         console.log(direction);
         switch(direction){
             case 0:
-                topright();
+                botleft();
                 break;
             case 1:
                 botright();
                 break;
             case 2:
-                botleft();
+                topright();
                 break;
             case 3:
                 topleft();
