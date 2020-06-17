@@ -125,11 +125,17 @@ function addlisteners(){
         }
     }
 
-    var pickercontainer = document.getElementById("pickercontainer")
-    pickercontainer.addEventListener("touchstart", handleStart);
-    pickercontainer.addEventListener("touchend", handleEnd);
-    pickercontainer.addEventListener("touchcancel", handleCancel);
-    pickercontainer.addEventListener("touchmove", handleMove);
+    // var pickercontainer = document.getElementById("pickercontainer")
+    // pickercontainer.addEventListener("touchstart", handleStart);
+    // pickercontainer.addEventListener("touchend", handleEnd);
+    // pickercontainer.addEventListener("touchcancel", handleCancel);
+    // pickercontainer.addEventListener("touchmove", handleMove);
+    var pickercontainer = document.getElementById('pickercontainer');
+    var activeRegion = new ZingTouch.Region(pickercontainer.firstChild);
+    activeRegion.bind(activeRegion, 'swipe', topleft);
+
+    console.log("listeners added")
+
 }
 
 
