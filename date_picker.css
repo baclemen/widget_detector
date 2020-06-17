@@ -18,13 +18,17 @@ button[class=detectorbutton]{
     border: 3px solid red !important;
     z-index: 5 !important;
 }
-//from datepickerwidget.css
+
+/* from datepickerwidget.js */
 
 [id="mon"]{
-
-    display: inline-block !important;
-    margin: 10%;
-    margin-bottom: 5%;
+    position: relative;
+    display: block !important;
+    top: 0;
+    left: 0;
+    margin-left: 10% !important;
+    margin-top: 10% !important;
+    margin-bottom: 5% !important;
     font-size: 1.25em !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
@@ -41,27 +45,42 @@ button[class=detectorbutton]{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 [id="pickercontainer"]{
-    position: relative;
-    display: inline-block;
+    position: relative !important;
+    display: block;
     left: auto;
     right: auto;
     width: 300px;
     height: 300px;
     background-color: rgb(255, 255, 142);
     border: 3px solid black;
-    z-index: 6;
+    z-index: 1000000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 [id="pickertable"]{
     margin-left: auto;
     margin-right: auto;
     width: 80%;
+    height: 70%;
     font-size: 1em;
+    border: 0;
 }
-[class="navdat"]{
+
+[class="pickertablerow"]{
+    text-align: right !important;
+}
+
+table[class="cbdatepicker"], tr[class="cbdatepicker"], td[class="cbdatepicker"], th[class="cbdatepicker"]{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    text-align: right !important;
+    padding: 0 !important;
+    border: 0;
+    background-color: rgb(255, 255, 142);
+}
+
+p[class="navdat"]{
     display: inline;
     position: absolute;
-    margin: 1%;
+    margin: 1% !important;
 }
 [id="navtopleft"]{
     top:0;
