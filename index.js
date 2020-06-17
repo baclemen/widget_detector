@@ -135,6 +135,7 @@ function addlisteners(){
     console.log(activeRegion)
     activeRegion.bind(pickercontainer, 'swipe', function(e){
         console.log(e);
+        console.log(e.detail.currentDirection)
         direction = Math.floor(e.detail.currentDirection/90);
         console.log(direction);
         switch(direction){
