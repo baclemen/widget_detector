@@ -5,9 +5,9 @@ var globdate = new Date();
 //today.setDate(today.getDate() - 1);
 
 
-console.log(globdate);
-viewchange(globdate,1);
-addlisteners();
+// console.log(globdate);
+// viewchange(globdate,1);
+// addlisteners();
 
 
 
