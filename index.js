@@ -181,7 +181,8 @@ swipe = new ZingTouch.Swipe({
 });
 
 function onswipe(e){
-    console.log(e);
+    console.log(e.detail.velocity);
+    console.log(e.detail.currentDirection);
 }
 
 function returnDate(val){
