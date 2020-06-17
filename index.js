@@ -131,14 +131,14 @@ function addlisteners(){
     // pickercontainer.addEventListener("touchcancel", handleCancel);
     // pickercontainer.addEventListener("touchmove", handleMove);
     var pickercontainer = document.getElementById('pickercontainer');
-    var activeRegion = new ZingTouch.Region(pickercontainer.firstChild);
-    activeRegion.bind(activeRegion, 'swipe', topleft);
+    var activeRegion = new ZingTouch.Region(pickercontainer);
+    console.log(activeRegion)
+    activeRegion.bind(pickercontainer, 'swipe', topleft);
 
     console.log("listeners added")
-
 }
 
-
+//functions for user interaction
 function topleft(){
     globdate.setMonth(globdate.getMonth()-1);
     viewchange(globdate,1);
@@ -172,6 +172,13 @@ function handleCancel(event){
 function handleMove(event){
     console.log("move");
 }
+
+//Zingtouch gestures
+swipe = new ZingTouch.Swipe({
+	numInputs: 1,
+	maxRestTime: 100,
+	escapeVelocity: 0.25
+});
 
 function returnDate(val){
     output = document.getElementById("output")
