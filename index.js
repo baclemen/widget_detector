@@ -180,7 +180,7 @@ swipe = new ZingTouch.Swipe({
 	escapeVelocity: 0.25
 });
 
-onswipe(event){
+function onswipe(event){
     console.log(event);
 }
 
