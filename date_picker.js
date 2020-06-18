@@ -13,7 +13,7 @@ var isopen = false;
 var pickerno;
 
 chrome.storage.sync.get(["enable"], function(data){
-    console.log("getenable");
+    //console.log("getenable");
     enabled=data.enable;
     if(enabled){
         createSelectors()
@@ -33,7 +33,7 @@ chrome.storage.sync.get(["enable"], function(data){
 
 //select all datepicker objects on the website
 const dateselectorlist = document.querySelectorAll('input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]');
-console.log(dateselectorlist);
+//onsole.log(dateselectorlist);
 // const dateselector2 = document.querySelectorAll('input[class*=Date]');
 // const dateselector3 = document.querySelectorAll('input[id*=date]');
 // const dateselector4 = document.querySelectorAll('input[id*=Date]');
@@ -43,9 +43,9 @@ console.log(dateselectorlist);
 //setting the date in the field to a specific value
 function setDate(event, date){
     event.preventDefault();
-    console.log("setDate");
-    console.log("nodelist:", dateselectorlist.item(0));
-    console.log(event);
+    //console.log("setDate");
+    //console.log("nodelist:", dateselectorlist.item(0));
+    //console.log(event);
     i = event.srcElement.id.match(/\d+/)[0];
     //dateselectorlist.item(0).setAttribute("value","1.1.2020"); 
     //dateselectorlist.item(i).click();
@@ -94,14 +94,14 @@ function createSelectors(){
 // body.appendChild(btn);
 
 function openpicker(event){
-    console.log(" new picker is opened")
+    //console.log(" new picker is opened")
     if(isopen){
 
     } else {
-    console.log("openpicker");
+    //console.log("openpicker");
     i = event.srcElement.id.match(/\d+/)[0];
     div = document.getElementById("pickerparent" + i);
-    console.log(div);
+    //console.log(div);
     pickerno = i;
     isopen = true;
     // var selstr = "[id*=pickerparent" + i + "]";
@@ -205,8 +205,6 @@ var htmlstring =`
         <p class="navdat" id="navbotright">bottomright</p>
     </div>
 
-    <h1 id="output">Selected date is:</h1>
-
 
     <script src="datepickerwidget.js"></script>
 </div>
@@ -248,9 +246,9 @@ function displayView(date, view){
 
 function findpos(date){
     x1 = date.getDay();
-    console.log(x1);
+    //console.log(x1);
     x1 = (x1 + 6)%7;
-    console.log(x1);
+    //console.log(x1);
     date0 = date.getDate() - x1;
     y1 = Math.ceil((date0+5)/7);
     return{
@@ -278,9 +276,9 @@ function writemonth(date){
 
 
     const datemp = new Date((date.getMonth()+1) + ' 1 ' + date.getFullYear())
-    console.log(datemp)
+    //console.log(datemp)
     x = findpos(datemp);
-    console.log("writemonth");
+    //console.log("writemonth");
     var rowtemp = x.row;
     var linetemp = x.line;
 
@@ -379,13 +377,13 @@ function daysInMonth (date) {
 
 function viewchange (date, view){
     globview = view;
-    console.log(date.getMonth());
-    console.log(date.getFullYear());
+    //console.log(date.getMonth());
+    //console.log(date.getFullYear());
 
     globdate.setMonth(date.getMonth());
     globdate.setYear(date.getFullYear());
     clearboard();
-    console.log("viewchange");
+    //console.log("viewchange");
     if(globview == 0){
         //console.log("viewchange0");
         writemonth(date);
@@ -418,7 +416,7 @@ function addlisteners(){
         
         for (var i = 0; i < rows.length; i++) {
             for (var j = 0; j < rows[i].cells.length; j++ ) {
-                activeRegion.bind(rows[i].cells[j],'tap', selectDate);
+                activeRegion.bind(rows[i].cells[j],'tap', celllistener);
                 //rows[i].cells[j].addEventListener('click', selectDate);
         }
     }
@@ -430,13 +428,13 @@ function addlisteners(){
     // pickercontainer.addEventListener("touchmove", handleMove);
     var pickercontainer = document.getElementById('pickercontainer');
     var activeRegion = new ZingTouch.Region(pickercontainer);
-    console.log(activeRegion);
+    //console.log(activeRegion);
     activeRegion.bind(pickercontainer, 'swipe', onswipe);
 
     activeRegion.bind(pickercontainer, zingdist, ondist);
 
     pickercontainer.addEventListener('wheel', onzoom);
-    console.log("scrolllogger")
+    //console.log("scrolllogger")
 
     console.log("listeners added")
 }
@@ -501,7 +499,7 @@ function botright(){
 
 }
 function celllistener(event){
-    console.log(event);
+    //console.log(event);
     if(globview == 0){
         var val =event.srcElement.id.match(/\d+/)[0];
         returnDate(val);
@@ -532,7 +530,7 @@ swipe = new ZingTouch.Swipe({
 });
 
 function onzoom(e){
-    console.log(e);
+    //console.log(e);
     if(e.deltaY < 0){
         var view = Math.max(0,globview-1);
     }
@@ -562,7 +560,7 @@ function onswipe(e){
 }
 
 function ondist(e){
-    console.log(e.detail.change);
+    //console.log(e.detail.change);
     if(e.detail.change > 0){
         var view = Math.max(0,globview-1);
     }
@@ -574,7 +572,6 @@ function ondist(e){
 
 
 function returnDate(val){
-    output = document.getElementById("output")
     var x = Math.floor(val/10)
     var y = val % 10;
     var str =(("d" + x) + y)
