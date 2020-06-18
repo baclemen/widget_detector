@@ -176,7 +176,7 @@ function addlisteners(){
     console.log(activeRegion);
     activeRegion.bind(pickercontainer, 'swipe', onswipe);
 
-    activeRegion.bind(pickercontainer, 'pinch', onpinch);
+    activeRegion.bind(pickercontainer, zingPinch, onpinch);
 
     pickercontainer.addEventListener('wheel', onzoom);
     console.log("scrolllogger")
@@ -296,6 +296,8 @@ function onswipe(e){
 function onpinch(e){
     console.log(e);
 }
+
+const zingPinch = new ZingTouch.Pinch({});
 
 function returnDate(val){
     output = document.getElementById("output")
