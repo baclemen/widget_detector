@@ -2,7 +2,7 @@
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthNamesshort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-var zingdist = ZingTouch.distance({
+var zingdist = new ZingTouch.Distance({
     threshold: 50
 })
 var globdate = new Date();
@@ -179,7 +179,7 @@ function addlisteners(){
     console.log(activeRegion);
     activeRegion.bind(pickercontainer, 'swipe', onswipe);
 
-    activeRegion.bind(pickercontainer, 'distance', ondist);
+    activeRegion.bind(pickercontainer, zingdist, ondist);
 
     pickercontainer.addEventListener('wheel', onzoom);
     console.log("scrolllogger")
