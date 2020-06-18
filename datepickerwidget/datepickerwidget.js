@@ -306,7 +306,6 @@ function ondist(e){
     }
     viewchange(globdate,view);
 }
-}
 
 
 function returnDate(val){
