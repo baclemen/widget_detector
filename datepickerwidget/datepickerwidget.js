@@ -11,9 +11,9 @@ var globviewmax = 2;
 //today.setDate(today.getDate() - 1);
 
 
-console.log(globdate);
-viewchange(globdate,2);
-addlisteners();
+//console.log(globdate);
+//viewchange(globdate,2);
+//addlisteners();
 
 
 
