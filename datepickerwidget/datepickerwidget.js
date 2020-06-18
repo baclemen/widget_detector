@@ -1,13 +1,16 @@
 //this is where i do date picker interaction
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const monthNamesshort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var globdate = new Date();
+var globview = 0 //0 : month , 1 : year, 2: 25 years
+var globviewmax = 1;
 //today.setDate(today.getDate() - 1);
 
 
-// console.log(globdate);
-// viewchange(globdate,1);
-// addlisteners();
+console.log(globdate);
+viewchange(globdate,1);
+addlisteners();
 
 
 
@@ -54,7 +57,7 @@ function writemonth(date){
     const datemp = new Date((date.getMonth()+1) + ' 1 ' + date.getFullYear())
     console.log(datemp)
     x = findpos(datemp);
-    console.log(x);
+    console.log("writemonth");
     var rowtemp = x.row;
     var linetemp = x.line;
 
@@ -75,18 +78,47 @@ function writemonth(date){
             break
         }
     }
+    
+}
+
+function writeyear(date){
+
+    globview = 1;
+    var d = 0;
+
+    document.getElementById("yea").innerHTML = date.getFullYear();
+    document.getElementById("mon").innerHTML = " Year ";
+
+    document.getElementById("cbdatepickerheader").style.display="none"
+
+    for(var i = 1; i<4; i++){
+        for(var j = 1; j<5; j++){
+            setField(i,j,monthNames[d].substring(0,3));
+            d++;
+        }
+    }
+
 }
 
 function writecorners(date){
+
     var navtopleft = document.getElementById("navtopleft");
     var navtopright = document.getElementById("navtopright");
     var navbotleft = document.getElementById("navbotleft");
     var navbotright = document.getElementById("navbotright");
 
+    if(globview == 0){
     navtopleft.innerHTML = monthNames[(date.getMonth()-1+12)%12];
     navbotright.innerHTML = monthNames[(date.getMonth()+1)%12];
     navtopright.innerHTML = date.getFullYear() + 1;
     navbotleft.innerHTML = date.getFullYear() - 1;
+    } 
+    else if(globview == 1){
+        navtopleft.innerHTML = date.getFullYear() - 1;
+        navbotright.innerHTML = date.getFullYear() + 1;
+        navtopright.innerHTML = date.getFullYear() + 25;
+        navbotleft.innerHTML = date.getFullYear() - 25;
+    }
 
 }
 
@@ -95,14 +127,23 @@ function daysInMonth (date) {
     return x;
 } 
 
-function viewchange (date, level){
+function viewchange (date, view){
+    globview = view;
     console.log(date.getMonth());
     console.log(date.getFullYear());
 
-    globdate.setMonth(date.getMonth())
-    globdate.setYear(date.getFullYear())
+    globdate.setMonth(date.getMonth());
+    globdate.setYear(date.getFullYear());
     clearboard();
-    writemonth(date);
+    console.log("viewchange");
+    if(globview == 0){
+        console.log("viewchange0");
+        writemonth(date);
+    }
+    else if (globview == 1){
+        console.log("viewchange");
+        writeyear(date);
+    }
     writecorners(date);
 }
 
@@ -121,7 +162,7 @@ function addlisteners(){
         for (var i = 0; i < rows.length; i++) {
             for (var j = 0; j < rows[i].cells.length; j++ ) {
                           
-                rows[i].cells[j].addEventListener('click', selectDate);
+                rows[i].cells[j].addEventListener('click', celllistener);
         }
     }
 
@@ -132,33 +173,75 @@ function addlisteners(){
     // pickercontainer.addEventListener("touchmove", handleMove);
     var pickercontainer = document.getElementById('pickercontainer');
     var activeRegion = new ZingTouch.Region(pickercontainer);
-    console.log(activeRegion)
+    console.log(activeRegion);
     activeRegion.bind(pickercontainer, 'swipe', onswipe);
+
+    activeRegion.bind(pickercontainer, 'pinch', onpinch);
+
+    pickercontainer.addEventListener('wheel', onzoom);
+    console.log("scrolllogger")
 
     console.log("listeners added")
 }
 
 //functions for user interaction
 function topleft(){
-    globdate.setMonth(globdate.getMonth()-1);
-    viewchange(globdate,1);
+    if(globview == 0){
+        globdate.setMonth(globdate.getMonth()-1);
+        viewchange(globdate, 0);
+    }
+    else if(globview == 1){
+        globdate.setYear(globdate.getFullYear()-1);
+        viewchange(globdate, 1);
+    }
 }
 function topright(){
-    globdate.setYear(globdate.getFullYear()+1);
-    viewchange(globdate,1);
+    if(globview == 0){
+        globdate.setYear(globdate.getFullYear()+1);
+        viewchange(globdate, 0);
+    }
+    else if(globview == 1){
+        globdate.setYear(globdate.getFullYear()+25);
+        viewchange(globdate, 1);
+    }
+
 }
 function botleft(){
-    globdate.setYear(globdate.getFullYear()-1);
-    viewchange(globdate,1);
+    if(globview == 0){
+        globdate.setYear(globdate.getFullYear()-1);
+        viewchange(globdate, 0);
+    }
+    else if(globview == 1){
+        globdate.setYear(globdate.getFullYear()-25);
+        viewchange(globdate, 1);
+    }
 }
 function botright(){
-    globdate.setMonth(globdate.getMonth()+1);
-    viewchange(globdate,1);
+    if(globview == 0){
+        globdate.setMonth(globdate.getMonth()+1);
+        viewchange(globdate, 0);
+    }
+    else if(globview == 1){
+        globdate.setYear(globdate.getFullYear()+1);
+        viewchange(globdate, 1);
+    }
+
 }
-function selectDate(event){
+function celllistener(event){
     console.log(event);
-    var val =event.srcElement.id.match(/\d+/)[0];
-    returnDate(val);
+    if(globview == 0){
+        var val =event.srcElement.id.match(/\d+/)[0];
+        returnDate(val);
+    }
+    else if(globview == 1){
+        var val = document.getElementById(event.srcElement.id).innerHTML;
+
+        var n = monthNamesshort.indexOf(val);
+
+        var date = new Date(globdate);
+        date.setMonth(n);
+        viewchange(date,0);
+    }
 }
 function handleStart(event){
     console.log("start");
@@ -180,6 +263,17 @@ swipe = new ZingTouch.Swipe({
 	escapeVelocity: 0.25
 });
 
+function onzoom(e){
+    console.log(e);
+    if(e.deltaY < 0){
+        var view = Math.max(0,globview-1);
+    }
+    else{
+        var view = Math.min(globviewmax,globview + 1);
+    }
+    viewchange(globdate,view);
+}
+
 function onswipe(e){
     direction = Math.floor(e.detail.data[0].currentDirection/90);
     console.log(direction);
@@ -197,6 +291,10 @@ function onswipe(e){
                 topleft();
                 break;
         }
+}
+
+function onpinch(e){
+    console.log(e);
 }
 
 function returnDate(val){
