@@ -111,7 +111,7 @@ function openpicker(event){
     // $(selstr).load("./datepickerwidget/datepickerwidget.html")
     temp = div.innerHTML
     div.innerHTML += htmlstring;
-    viewchange(new Date(),0);
+    viewchange(new Date(),1);
     addlisteners();
     }
 }
@@ -580,6 +580,6 @@ function returnDate(val){
     var str =(("d" + x) + y)
     var val = document.getElementById(str).innerHTML;
     globdate.setDate(val);
-    
-    output.innerHTML = "Selected date is:" + globdate;
+    $("input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]").eq(pickerno).val((globdate.getDate()) + "." + (globdate.getMonth()+1) + "." + (globdate.getFullYear()));
+    closepicker();
 }
