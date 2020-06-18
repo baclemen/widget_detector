@@ -2,6 +2,9 @@
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthNamesshort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var zingdist = ZingTouch.distance({
+    threshold: 50
+})
 var globdate = new Date();
 var globview = 0 //0 : month , 1 : year, 2: 25 years
 var globviewmax = 1;
