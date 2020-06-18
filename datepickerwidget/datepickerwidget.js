@@ -3,7 +3,7 @@
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthNamesshort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var zingdist = new ZingTouch.Distance({
-    threshold: 50
+    threshold: 80
 })
 var globdate = new Date();
 var globview = 0 //0 : month , 1 : year, 2: 25 years
@@ -297,7 +297,15 @@ function onswipe(e){
 }
 
 function ondist(e){
-    console.log(e);
+    console.log(e.detail[0].change);
+    if(e.detail[0].change < 0){
+        var view = Math.max(0,globview-1);
+    }
+    else{
+        var view = Math.min(globviewmax,globview + 1);
+    }
+    viewchange(globdate,view);
+}
 }
 
 
