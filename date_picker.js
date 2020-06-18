@@ -111,7 +111,7 @@ function openpicker(event){
     // $(selstr).load("./datepickerwidget/datepickerwidget.html")
     temp = div.innerHTML
     div.innerHTML += htmlstring;
-    viewchange(new Date(),1);
+    viewchange(new Date(),0);
     addlisteners();
     }
 }
