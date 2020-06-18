@@ -297,8 +297,8 @@ function onswipe(e){
 }
 
 function ondist(e){
-    console.log(e.detail.distance);
-    if(e.detail.distance < 0){
+    console.log(e.detail.change);
+    if(e.detail.change < 0){
         var view = Math.max(0,globview-1);
     }
     else{
