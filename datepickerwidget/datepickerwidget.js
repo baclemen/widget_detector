@@ -3,16 +3,16 @@
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthNamesshort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var zingdist = new ZingTouch.Distance({
-    threshold: 80
+    threshold: 100
 })
 var globdate = new Date();
 var globview = 0 //0 : month , 1 : year, 2: 25 years
-var globviewmax = 1;
+var globviewmax = 2;
 //today.setDate(today.getDate() - 1);
 
 
 console.log(globdate);
-viewchange(globdate,1);
+viewchange(globdate,2);
 addlisteners();
 
 
@@ -53,8 +53,11 @@ function clearboard(){
 
 function writemonth(date){
 
+    globdate = date;
+
     document.getElementById("yea").innerHTML = date.getFullYear();
     document.getElementById("mon").innerHTML = monthNames[date.getMonth()];
+    $("[id=cbdatepickerheader]").show();
 
 
     const datemp = new Date((date.getMonth()+1) + ' 1 ' + date.getFullYear())
@@ -92,7 +95,7 @@ function writeyear(date){
     document.getElementById("yea").innerHTML = date.getFullYear();
     document.getElementById("mon").innerHTML = " Year ";
 
-    document.getElementById("cbdatepickerheader").style.display="none"
+    $("[id=cbdatepickerheader]").hide();
 
     for(var i = 1; i<4; i++){
         for(var j = 1; j<5; j++){
@@ -100,6 +103,25 @@ function writeyear(date){
             d++;
         }
     }
+
+}
+
+function write25years(date){
+
+    var d = Math.floor(date.getFullYear()/25)*25
+    document.getElementById("yea").innerHTML = d + " - " + (d+25);
+    document.getElementById("mon").innerHTML = " Years ";
+
+    $("[id=cbdatepickerheader]").hide();
+
+    for(var i = 1; i<6; i++){
+        for(var j = 1; j<6; j++){
+            setField(i,j,d);
+            d++;
+        }
+    }
+
+    globview = 2;
 
 }
 
@@ -122,6 +144,14 @@ function writecorners(date){
         navtopright.innerHTML = date.getFullYear() + 25;
         navbotleft.innerHTML = date.getFullYear() - 25;
     }
+    else if (globview == 2){
+        var d = Math.floor(date.getFullYear()/25)*25
+
+        navtopleft.innerHTML = d - 1;
+        navbotright.innerHTML = d + 25;
+        navtopright.innerHTML = d + 100;
+        navbotleft.innerHTML = d - 200;
+    }
 
 }
 
@@ -140,12 +170,15 @@ function viewchange (date, view){
     clearboard();
     console.log("viewchange");
     if(globview == 0){
-        console.log("viewchange0");
+        //console.log("viewchange0");
         writemonth(date);
     }
     else if (globview == 1){
-        console.log("viewchange");
+        //console.log("viewchange");
         writeyear(date);
+    }
+    else if (globview == 2){
+        write25years(date);
     }
     writecorners(date);
 }
@@ -160,12 +193,16 @@ function addlisteners(){
     navbotleft.addEventListener('click', botleft);
     navbotright.addEventListener('click', botright);
 
+    
+    var pickercontainer = document.getElementById('pickercontainer');
+    var activeRegion = new ZingTouch.Region(pickercontainer);
+
         var rows = document.getElementById('pickertable').rows;
         
         for (var i = 0; i < rows.length; i++) {
             for (var j = 0; j < rows[i].cells.length; j++ ) {
-                          
-                rows[i].cells[j].addEventListener('click', celllistener);
+                activeRegion.bind(rows[i].cells[j],'tap', selectDate);
+                //rows[i].cells[j].addEventListener('click', selectDate);
         }
     }
 
@@ -197,6 +234,10 @@ function topleft(){
         globdate.setYear(globdate.getFullYear()-1);
         viewchange(globdate, 1);
     }
+    else if(globview == 2){
+        globdate.setYear(globdate.getFullYear()-25);
+        viewchange(globdate, 2)
+    }
 }
 function topright(){
     if(globview == 0){
@@ -206,6 +247,10 @@ function topright(){
     else if(globview == 1){
         globdate.setYear(globdate.getFullYear()+25);
         viewchange(globdate, 1);
+    }
+    else if(globview == 2){
+        globdate.setYear(globdate.getFullYear()+100);
+        viewchange(globdate, 2)
     }
 
 }
@@ -218,6 +263,10 @@ function botleft(){
         globdate.setYear(globdate.getFullYear()-25);
         viewchange(globdate, 1);
     }
+    else if(globview == 2){
+        globdate.setYear(globdate.getFullYear()-100);
+        viewchange(globdate, 2)
+    }
 }
 function botright(){
     if(globview == 0){
@@ -227,6 +276,10 @@ function botright(){
     else if(globview == 1){
         globdate.setYear(globdate.getFullYear()+1);
         viewchange(globdate, 1);
+    }
+    else if(globview == 2){
+        globdate.setYear(globdate.getFullYear()+25);
+        viewchange(globdate, 2);
     }
 
 }
@@ -245,18 +298,13 @@ function celllistener(event){
         date.setMonth(n);
         viewchange(date,0);
     }
-}
-function handleStart(event){
-    console.log("start");
-}
-function handleEnd(event){
-    console.log("end");
-}
-function handleCancel(event){
-    console.log("cancel");
-}
-function handleMove(event){
-    console.log("move");
+    else if(globview == 2){
+        var date = new Date(globdate);
+        var val = document.getElementById(event.srcElement.id).innerHTML;
+        date.setYear(val);
+        viewchange(date,1);
+
+    }
 }
 
 //Zingtouch gestures
@@ -298,7 +346,7 @@ function onswipe(e){
 
 function ondist(e){
     console.log(e.detail.change);
-    if(e.detail.change < 0){
+    if(e.detail.change > 0){
         var view = Math.max(0,globview-1);
     }
     else{
