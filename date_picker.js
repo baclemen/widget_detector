@@ -121,7 +121,7 @@ function closepicker(){
     div.removeChild(div.childNodes[2]);
     isopen = false;
     btn = div.firstChild;
-    console.log(btn);
+    //console.log(btn);
     var butReg = new ZingTouch.Region(btn);
     butReg.bind(btn,'tap', openpicker);
 }
@@ -130,83 +130,78 @@ function closepicker(){
 
 //html for the date picker
 var htmlstring =`
-<div>
-    <div id="pickercontainer">
-        <p class="navdat" id="navtopleft">topleft</p>
-        <p class="navdat" id="navtopright">topright</p>
-        <p id="mon">Month</p>
-        <p id="yea">Year</p>
-        <table id="pickertable" class="cbdatepicker">
-            <tr class="cbdatepicker">
-                <th class="cbdatepicker">Mon</th>
-                <th class="cbdatepicker">Tue</th>
-                <th class="cbdatepicker">Wed</th>
-                <th class="cbdatepicker">Thu</th>
-                <th class="cbdatepicker">Fri</th>
-                <th class="cbdatepicker">Sat</th>
-                <th class="cbdatepicker">Sun</th>
-            </tr>
-            <tr class="cbdatepicker">
-                <td class="cbdatepicker" id="d00" ></td>
-                <td class="cbdatepicker" id="d01"></td>
-                <td class="cbdatepicker" id="d02"></td>
-                <td class="cbdatepicker" id="d03"></td>
-                <td class="cbdatepicker" id="d04"></td>
-                <td class="cbdatepicker" id="d05"></td>
-                <td class="cbdatepicker" id="d06"></td>
-            </tr>
-            <tr class="cbdatepicker">
-                <td class="cbdatepicker" id="d10"></td>
-                <td class="cbdatepicker" id="d11"></td>
-                <td class="cbdatepicker" id="d12"></td>
-                <td class="cbdatepicker" id="d13"></td>
-                <td class="cbdatepicker" id="d14"></td>
-                <td class="cbdatepicker" id="d15"></td>
-                <td class="cbdatepicker" id="d16"></td>
-            </tr>
-            <tr class="cbdatepicker">
-                <td class="cbdatepicker" id="d20"></td>
-                <td class="cbdatepicker" id="d21"></td>
-                <td class="cbdatepicker" id="d22"></td>
-                <td class="cbdatepicker" id="d23"></td>
-                <td class="cbdatepicker" id="d24"></td>
-                <td class="cbdatepicker" id="d25"></td>
-                <td class="cbdatepicker" id="d26"></td>
-            </tr>
-            <tr class="cbdatepicker">
-                <td class="cbdatepicker" id="d30"></td>
-                <td class="cbdatepicker" id="d31"></td>
-                <td class="cbdatepicker" id="d32"></td>
-                <td class="cbdatepicker" id="d33"></td>
-                <td class="cbdatepicker" id="d34"></td>
-                <td class="cbdatepicker" id="d35"></td>
-                <td class="cbdatepicker" id="d36"></td>
-            </tr>
-            <tr class="cbdatepicker">
-                <td class="cbdatepicker" id="d40"></td>
-                <td class="cbdatepicker" id="d41"></td>
-                <td class="cbdatepicker" id="d42"></td>
-                <td class="cbdatepicker" id="d43"></td>
-                <td class="cbdatepicker" id="d44"></td>
-                <td class="cbdatepicker" id="d45"></td>
-                <td class="cbdatepicker" id="d46"></td>
-            </tr>
-            <tr class="cbdatepicker">
-                <td class="cbdatepicker" id="d50"></td>
-                <td class="cbdatepicker" id="d51"></td>
-                <td class="cbdatepicker" id="d52"></td>
-                <td class="cbdatepicker" id="d53"></td>
-                <td class="cbdatepicker" id="d54"></td>
-                <td class="cbdatepicker" id="d55"></td>
-                <td class="cbdatepicker" id="d56"></td>
-            </tr>
-        </table>
-        <p class="navdat" id="navbotleft">bottomleft</p>
-        <p class="navdat" id="navbotright">bottomright</p>
-    </div>
-
-
-    <script src="datepickerwidget.js"></script>
+<div id="pickercontainer">
+<p class="navdat" id="navtopleft">topleft</p>
+<p class="navdat" id="navtopright">topright</p>
+<p id="mon">Month</p>
+<p id="yea">Year</p>
+<table id="pickertable" class="cbdatepicker">
+    <tr class="cbdatepicker" id="cbdatepickerheader">
+        <th class="cbdatepicker">Mon</th>
+        <th class="cbdatepicker">Tue</th>
+        <th class="cbdatepicker">Wed</th>
+        <th class="cbdatepicker">Thu</th>
+        <th class="cbdatepicker">Fri</th>
+        <th class="cbdatepicker">Sat</th>
+        <th class="cbdatepicker">Sun</th>
+    </tr>
+    <tr class="cbdatepicker">
+        <td class="cbdatepicker" id="d00" ></td>
+        <td class="cbdatepicker" id="d01"></td>
+        <td class="cbdatepicker" id="d02"></td>
+        <td class="cbdatepicker" id="d03"></td>
+        <td class="cbdatepicker" id="d04"></td>
+        <td class="cbdatepicker" id="d05"></td>
+        <td class="cbdatepicker" id="d06"></td>
+    </tr>
+    <tr class="cbdatepicker">
+        <td class="cbdatepicker" id="d10"></td>
+        <td class="cbdatepicker" id="d11"></td>
+        <td class="cbdatepicker" id="d12"></td>
+        <td class="cbdatepicker" id="d13"></td>
+        <td class="cbdatepicker" id="d14"></td>
+        <td class="cbdatepicker" id="d15"></td>
+        <td class="cbdatepicker" id="d16"></td>
+    </tr>
+    <tr class="cbdatepicker">
+        <td class="cbdatepicker" id="d20"></td>
+        <td class="cbdatepicker" id="d21"></td>
+        <td class="cbdatepicker" id="d22"></td>
+        <td class="cbdatepicker" id="d23"></td>
+        <td class="cbdatepicker" id="d24"></td>
+        <td class="cbdatepicker" id="d25"></td>
+        <td class="cbdatepicker" id="d26"></td>
+    </tr>
+    <tr class="cbdatepicker">
+        <td class="cbdatepicker" id="d30"></td>
+        <td class="cbdatepicker" id="d31"></td>
+        <td class="cbdatepicker" id="d32"></td>
+        <td class="cbdatepicker" id="d33"></td>
+        <td class="cbdatepicker" id="d34"></td>
+        <td class="cbdatepicker" id="d35"></td>
+        <td class="cbdatepicker" id="d36"></td>
+    </tr>
+    <tr class="cbdatepicker">
+        <td class="cbdatepicker" id="d40"></td>
+        <td class="cbdatepicker" id="d41"></td>
+        <td class="cbdatepicker" id="d42"></td>
+        <td class="cbdatepicker" id="d43"></td>
+        <td class="cbdatepicker" id="d44"></td>
+        <td class="cbdatepicker" id="d45"></td>
+        <td class="cbdatepicker" id="d46"></td>
+    </tr>
+    <tr class="cbdatepicker">
+        <td class="cbdatepicker" id="d50"></td>
+        <td class="cbdatepicker" id="d51"></td>
+        <td class="cbdatepicker" id="d52"></td>
+        <td class="cbdatepicker" id="d53"></td>
+        <td class="cbdatepicker" id="d54"></td>
+        <td class="cbdatepicker" id="d55"></td>
+        <td class="cbdatepicker" id="d56"></td>
+    </tr>
+</table>
+<p class="navdat" id="navbotleft">bottomleft</p>
+<p class="navdat" id="navbotright">bottomright</p>
 </div>
 `
 
@@ -272,7 +267,8 @@ function writemonth(date){
 
     document.getElementById("yea").innerHTML = date.getFullYear();
     document.getElementById("mon").innerHTML = monthNames[date.getMonth()];
-    $("[id=cbdatepickerheader]").show();
+    document.getElementById("cbdatepickerheader").style.display = "table-row";
+    //$("[id=cbdatepickerheader]").show();
 
 
     const datemp = new Date((date.getMonth()+1) + ' 1 ' + date.getFullYear())
@@ -309,8 +305,8 @@ function writeyear(date){
 
     document.getElementById("yea").innerHTML = date.getFullYear();
     document.getElementById("mon").innerHTML = " Year ";
-
-    $("[id=cbdatepickerheader]").hide();
+    document.getElementById("cbdatepickerheader").style.display = "none";
+    //$("[id=cbdatepickerheader]").hide();
 
     for(var i = 1; i<4; i++){
         for(var j = 1; j<5; j++){
@@ -326,8 +322,10 @@ function write25years(date){
     var d = Math.floor(date.getFullYear()/25)*25
     document.getElementById("yea").innerHTML = d + " - " + (d+25);
     document.getElementById("mon").innerHTML = " Years ";
+    document.getElementById("cbdatepickerheader").style.display = "none";
 
-    $("[id=cbdatepickerheader]").hide();
+
+    //$("[id=cbdatepickerheader]").hide();
 
     for(var i = 1; i<6; i++){
         for(var j = 1; j<6; j++){
@@ -436,7 +434,7 @@ function addlisteners(){
     pickercontainer.addEventListener('wheel', onzoom);
     //console.log("scrolllogger")
 
-    console.log("listeners added")
+//    console.log("listeners added")
 }
 
 //functions for user interaction
@@ -530,6 +528,7 @@ swipe = new ZingTouch.Swipe({
 });
 
 function onzoom(e){
+    e.preventDefault()
     //console.log(e);
     if(e.deltaY < 0){
         var view = Math.max(0,globview-1);

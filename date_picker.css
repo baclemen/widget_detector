@@ -1,6 +1,6 @@
-input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]{
+/* input[class*=date], input[class*=Date], input[id*=date], input[id*=Date]{
     background: #ffff00 !important;
-}
+} */
 /* input[class*=Date]{
     background: #ffff00 !important;
 }
@@ -29,7 +29,7 @@ button[class=detectorbutton]{
     margin-left: 10% !important;
     margin-top: 10% !important;
     margin-bottom: 5% !important;
-    font-size: 1.25em !important;
+    font-size: 2em !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
 }
@@ -41,7 +41,7 @@ button[class=detectorbutton]{
     margin: 10%;
     margin-bottom: 5%;
     display: inline-block !important;
-    font-size: 1.25em !important;
+    font-size: 2em !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 [id="pickercontainer"]{
@@ -49,8 +49,8 @@ button[class=detectorbutton]{
     display: block;
     left: auto;
     right: auto;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     background-color: rgb(255, 255, 142);
     border: 3px solid black;
     z-index: 1000000;
@@ -61,7 +61,7 @@ button[class=detectorbutton]{
     margin-right: auto;
     width: 80%;
     height: 70%;
-    font-size: 1em;
+    font-size: 1.5em;
     border: 0;
 }
 
