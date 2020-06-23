@@ -528,7 +528,7 @@ swipe = new ZingTouch.Swipe({
 });
 
 function onzoom(e){
-    e.preventDefault()
+    e.preventDefault();
     //console.log(e);
     if(e.deltaY < 0){
         var view = Math.max(0,globview-1);
